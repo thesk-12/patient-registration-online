@@ -1,0 +1,12 @@
+{
+  "name": "patient-registration-system-online",
+  "version": "1.0.0",
+  "description": "Patient Registration System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
