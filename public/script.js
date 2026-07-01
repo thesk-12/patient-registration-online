@@ -39,7 +39,7 @@ async function generatePatientID(){
 const form = document.getElementById("patientForm");
 const message = document.getElementById("message");
 
-document.getElementById("dob").addEventListener("change", calculateAge);
+
 
 // =========================
 // AUTO CALCULATE AGE
@@ -148,7 +148,7 @@ form.addEventListener("submit",async function(e){
 
         age:Number(document.getElementById("age").value),
 
-        occupation:document.getElementById("occupation") || "Not Provided",
+        occupation:document.getElementById("occupation").value.trim()  || "Not Provided",
 
         contact:contact || "Not Provided",
 
