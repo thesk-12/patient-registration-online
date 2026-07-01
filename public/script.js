@@ -45,44 +45,37 @@ document.getElementById("dob").addEventListener("change", calculateAge);
 // AUTO CALCULATE AGE
 // =========================
 
-function calculateAge() {
+function calculateAge(){
 
-    const dobInput = document.getElementById("dob");
-    const ageInput = document.getElementById("age");
+    const dob=document.getElementById("dob").value;
 
-    if (!dobInput || !ageInput) return;
+    if(!dob) return;
 
-    if (dobInput.value === "") {
+    const birth=new Date(dob);
 
-        ageInput.value = "";
-        return;
+    const today=new Date();
 
-    }
+    let age=today.getFullYear()-birth.getFullYear();
 
-    const dob = new Date(dobInput.value);
-    const today = new Date();
+    const month=today.getMonth()-birth.getMonth();
 
-    let age = today.getFullYear() - dob.getFullYear();
-
-    const monthDifference = today.getMonth() - dob.getMonth();
-
-    if (
-        monthDifference < 0 ||
-        (monthDifference === 0 && today.getDate() < dob.getDate())
-    ) {
+    if(month<0 || (month===0 && today.getDate()<birth.getDate())){
 
         age--;
 
     }
 
-    if (age < 0) {
+    if(age<1 || age>100){
 
-        ageInput.value = "";
+        document.getElementById("age").value="";
+
+        showMessage("Age must be between 1 and 100 years.",false);
+
         return;
 
     }
 
-    ageInput.value = age;
+    document.getElementById("age").value=age;
 
 }
 function showMessage(text,success){
