@@ -41,40 +41,50 @@ const message = document.getElementById("message");
 
 document.getElementById("dob").addEventListener("change", calculateAge);
 
-function calculateAge(){
+// =========================
+// AUTO CALCULATE AGE
+// =========================
 
-    const dob=document.getElementById("dob").value;
+function calculateAge() {
 
-    if(!dob) return;
+    const dobInput = document.getElementById("dob");
+    const ageInput = document.getElementById("age");
 
-    const birth=new Date(dob);
+    if (!dobInput || !ageInput) return;
 
-    const today=new Date();
+    if (dobInput.value === "") {
 
-    let age=today.getFullYear()-birth.getFullYear();
+        ageInput.value = "";
+        return;
 
-    const month=today.getMonth()-birth.getMonth();
+    }
 
-    if(month<0 || (month===0 && today.getDate()<birth.getDate())){
+    const dob = new Date(dobInput.value);
+    const today = new Date();
+
+    let age = today.getFullYear() - dob.getFullYear();
+
+    const monthDifference = today.getMonth() - dob.getMonth();
+
+    if (
+        monthDifference < 0 ||
+        (monthDifference === 0 && today.getDate() < dob.getDate())
+    ) {
 
         age--;
 
     }
 
-    if(age<1 || age>100){
+    if (age < 0) {
 
-        document.getElementById("age").value="";
-
-        showMessage("Age must be between 1 and 100 years.",false);
-
+        ageInput.value = "";
         return;
 
     }
 
-    document.getElementById("age").value=age;
+    ageInput.value = age;
 
 }
-
 function showMessage(text,success){
 
     message.innerHTML=text;
@@ -547,6 +557,14 @@ window.onload=function(){
     document.getElementById("appointmentDate").min=current;
 
     document.getElementById("dob").max=current;
+    const dobField = document.getElementById("dob");
+
+if (dobField) {
+
+    dobField.addEventListener("change", calculateAge);
+    dobField.addEventListener("input", calculateAge);
+
+}
 
 }
 
